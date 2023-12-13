@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 
-export const GET_ALL_USERS = gql`
+export const GET_ALL_USERS =async()=> {
+const getAllUser=gql`
 query {
     getAllUser {
       id
@@ -9,6 +10,8 @@ query {
     }
   }
 `;
+return useQuery(getAllUser);
+}
 export const GET_ALL_PROVINCE=async()=>{
 const getAllProvince=gql`
 query{ getAllProvince{
@@ -44,7 +47,22 @@ export const GET_HOSPITAL_BY_ID=async(id:string|undefined)=>{
         }
     }
     `;
-    return (useQuery(hospitalDetail,{ variables:{id:id}}));
-   
-};
- 
+    return (useQuery(hospitalDetail,{ variables:{id:id}}));};
+
+ export const GET_ALL_HOSPITAL=()=>{
+        const hospitalDetail=gql`
+        query{
+            getAllHospital{
+              id
+              name
+              location{
+                id
+                name
+                location{
+                    name
+                }
+              }
+            }
+        }
+        `;
+        return (useQuery(hospitalDetail));};
