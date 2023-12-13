@@ -1,15 +1,16 @@
-import AdminHome from "../../Component/AdminHome"
-import { Hospital } from "../../Component/Hospital/Hospital"
+import { Link } from "react-router-dom"
+import AdminHome from "../../Component/Admin/AdminHome"
+import { Hospital } from "../../Component/Admin/Hospital/Hospital"
+import AppUserHome from "../../Component/Admin/User/AppUserHome"
+import { Settings } from "../../Component/Settings"
 export const Admin=()=>{
+
 return(
-<main className="overflow-auto" style={{position:'fixed',width:'100%',height:'100%',backgroundImage:'url(/visitor/doctors.jpg)',backgroundSize:'cover',backgroundRepeat:'no-repeat',backgroundPosition:'fixed'}}>
-<nav
-    className="navbar navbar-expand-md navbar-info"
-    
->
-    <a className="navbar-brand mx-2" href="#">
+<main className="overflow-auto col-sm-12 m-auto" style={{position:'fixed',width:'100%',height:'100%',backgroundImage:'url(/visitor/doctors.jpg)',backgroundSize:'cover',backgroundRepeat:'no-repeat',backgroundPosition:'fixed'}}>
+<nav className="navbar navbar-expand-md navbar-info sticky-top mb-4"  style={{backgroundColor:'rgb(0,0,0,.5)'}}>
+    <Link className="navbar-brand mx-2" to={'/'}>
         <img  src="/icon/hospital.png" width={100} alt="" />
-    </a>
+    </Link>
     <button
         className="navbar-toggler d-lg-none"
         type="button"
@@ -28,24 +29,31 @@ return(
     </button>
   </li>
   <li className="nav-item" role="presentation">
-    <button className="nav-link hover-me p-4 hover-me rounded-pill" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+    <button className="nav-link hover-me p-4 hover-me rounded-pill" id="hospital-tab" data-bs-toggle="pill" data-bs-target="#hospital" type="button" role="tab" aria-controls="hospital" aria-selected="false">
     <i className="bi bi-hospital-fill display-6"></i>
     </button>
   </li>
   <li className="nav-item" role="presentation">
-    <button className="nav-link hover-me" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+    <button className="nav-link hover-me" id="pills-setting-tab" data-bs-toggle="pill" data-bs-target="#pills-setting" type="button" role="tab" aria-controls="pills-setting" aria-selected="false">
     <i className="bi bi-gear-fill display-6"></i>
     </button>
   </li>
   <li className="nav-item" role="presentation">
-    <button className="nav-link hover-me p-4 hover-me rounded-pill" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+    <button className="nav-link hover-me p-4 hover-me rounded-pill" id="hospital-tab" data-bs-toggle="pill" data-bs-target="#pills-user-tab" type="button" role="tab" aria-controls="hospital" aria-selected="false">
     <i className="bi bi-people-fill display-6"></i>
     </button>
   </li>
 </ul>
-
-        </ul>
-        <span>Mike</span>
+</ul>
+        <div className="dropdown">
+          <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+           <i className="bi bi-person display-5"></i>
+          </button>
+          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><Link className="dropdown-item" to={'/'}>Admin</Link></li>
+            <li><Link className="dropdown-item" to={'/'}>Logout</Link></li>
+          </ul>
+        </div>
     </div>
 </nav>
 <main>
@@ -53,10 +61,15 @@ return(
   <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
     <AdminHome/>
   </div>
-  <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+  <div className="tab-pane fade" id="hospital" role="tabpanel" aria-labelledby="hospital-tab">
     <Hospital/>
   </div>
-  <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">Settings</div>
+  <div className="tab-pane fade show" id="pills-setting" role="tabpanel" aria-labelledby="pills-setting-tab">
+    <Settings/>
+  </div>
+  <div className="tab-pane fade" id="pills-user-tab" role="tabpanel" aria-labelledby="pills-contact-tab">
+    <AppUserHome/>
+  </div>
 </div>
 </main>
     </main>
