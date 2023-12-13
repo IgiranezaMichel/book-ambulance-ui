@@ -2,6 +2,7 @@ import {useState} from 'react'
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../../GraphQl/Mutation';
 import { ToastContainer,toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 const SignUp=()=>{
     const[name,setName]=useState('');
     const[gender,setGender]=useState('');
@@ -21,101 +22,92 @@ const SignUp=()=>{
   };
   
     const submitHandler=()=>{
-     userInput.name==''?toast.error("Please specify your name",{delay:200,})
-     :userInput.email==''?toast.error("Please specify your Email address",{delay:200,}):
-     userInput.gender==''?toast.error('Please Select your Gender'):
-     userInput.phoneNumber==''?toast.error('Please specify your Phone number'):
-     userInput.password=='' ?toast.error('Please specify your password'):
+      name.length==0?toast.error("Please specify your name",{delay:200,})
+     :gender.length==0?toast.error('Please Select your Gender')
+     :phoneNumber.length==0?toast.error('Please specify your Phone number')
+     :email.length==0?toast.error("Please specify your Email address",{delay:200,})
+     :password.length==0 ?toast.error('Please specify your password'):
      handleAddUser(userInput)
     }
-    
     const [addUser,{loading,error,data}] = useMutation(CREATE_USER);
     const handleAddUser = async (userData:UserInput) => {
         setShowReset(!showReset);
         try {
-          const { data } = await addUser({
+          await addUser({
             variables: {
               input: userData,
             },
           });
-          console.log('User added:', data.addUser);
         } catch (error) {
           console.error('Error adding user:', error);
         }
+        if(data){
+          toast.success(data.addUser.name+" Added successfully");
+          handleReset();
+        }
+        if(error){
+          toast('Unable to reach the server')
+        }
       };
 
-      if(data){
-        toast.success(data.addUser.name+" Added successfully")
-      }
-      if(error){
-        toast('Unable to reach the server')
-      }
-
-// const addUser=gql`
-// mutation{
-//     addUser($input:userInput):User
-// }
-// `;
-//  const { loading, error, data } = useQuery(GET_LOCATIONS);
-//  if(error)
-//  {
-//     console.log(error)
-//  }
-//  if(loading)
-//  {
-//     console.log("...Loading");
-//  }
-//  if(data)
-//  console.log(data);
+      
+      
 return (
 <>
 <main>
-    <div className="card bg-dark text-white fixed-top border-0" style={{height:"100dvh"}}>
-        <img className="card-img rounded-0" src="/visitor/authentication.png" alt="Title" />
-        <div className="card-img-overlay overflow-auto" style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-           <div className="bg-white border col-lg-6 text-dark p-lg-5 mt-lg-5">
-                <h4 className="card-title border-bottom p-3">Sign up</h4>
-                <div className="mb-3">
-                  <span  className="form-span">Name</span>
-                  <input type="text" name="name" value={userInput.name} onChange={e=>setName(e.target.value)} className="form-control" placeholder="Enter your name ..." />
-                </div>
-                <div className="mb-3">
-                    <span >Select Gender</span>
-                    <select
-                        className="form-select"
-                        value={userInput.gender}
-                        onChange={(e)=>{setGender(e.target.value)}}
-                        required
-                        name="gender"  
-                        >
-                        <option value="">--Select gender--</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-                <div className="mb-3">
-                  <span  className="form-span">Phone Number</span>
-                  <input type="tel" value={userInput.phoneNumber}  onChange={e=>setPhoneNumber(e.target.value)} name="phoneNumber" className="form-control"/>
-                </div>
-                <div className="mb-3">
-                  <span  className="form-span">Email</span>
-                  <input type="email" value={userInput.email} onChange={e=>setEmail(e.target.value)} className="form-control" name="email"/>
-                </div>
-                <div className="mb-3">
-                  <span  className="form-span">Password</span>
-                  <input type="password" value={userInput.password} onChange={e=>setPassword(e.target.value)} className="form-control" name="password"/>
-                </div>
-                <div className="modal-footer">
-                {showReset?<button className="btn btn-outline-success" onClick={handleReset}>Reset</button>:null}
-                    <button type="button" onClick={submitHandler} className="btn btn-outline-primary">{loading?<div className="spinner-border text-primary" role="status">
-                      <span className="visually-hidden">Loading...</span>
-                    </div>:<i>Submit</i>}</button>
-                </div>
-           </div>
+<div className="container-fluid pt-lg-0 bg-primary overflow-auto mb-5 fixed-top h-100" >
+        <div className="container pt-lg-1">
+            <div className="row g-5 pt-1 mb-2">
+                <section className="col-lg-6 align-self-center text-center text-lg-start mb-lg-5">
+                    <h1 className="display-4 text-white mb-4 fw-bolder">
+                        Find Hospital Ambulance online
+                    </h1>
+                    <p className="text-white mb-4">Tempor rebum no at dolore lorem clita rebum rebum ipsum
+                        rebum stet dolor sed justo kasd. Ut dolor sed magna dolor sea diam. Sit diam sit</p>
+                    <Link to={'/'} className="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3">Home</Link>
+                    <Link to={'/login'} className="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill">login</Link>
+                </section>
+                <section className="col-lg-6">
+                  <div className="border  text-dark  mt-lg-5" style={{backgroundColor:'rgb(0,0,0,0.5)'}}>
+                      <h4 className="card-title border-bottom p-3 text-white">Sign up</h4>
+                      <section className='p-4'>
+                          <div className="mb-3">
+                            <span  className="form-span text-white">Name</span>
+                            <input type="text" name="name" value={name} onChange={e=>setName(e.target.value)} className="form-control" placeholder="Enter your name ..." />
+                          </div>
+                          <div className="mb-3">
+                              <span className='text-white'>Select Gender</span>
+                              <select className="form-select"  value={gender}  onChange={(e)=>{setGender(e.target.value)}}  required name="gender">
+                                  <option value="">--Select gender--</option>
+                                  <option value="Male">Male</option>
+                                  <option value="Female">Female</option>
+                              </select>
+                          </div>
+                          <div className="mb-3">
+                            <span  className="form-span text-white">Phone Number</span>
+                            <input type="tel" value={phoneNumber}  onChange={e=>setPhoneNumber(e.target.value)} name="phoneNumber" className="form-control"/>
+                          </div>
+                          <div className="mb-3">
+                            <span  className="form-span text-white">Email</span>
+                            <input type="email" value={email} onChange={e=>setEmail(e.target.value)} className="form-control" name="email"/>
+                          </div>
+                          <div className="mb-3">
+                            <span  className="form-span text-white">Password</span>
+                            <input type="password" value={password} onChange={e=>setPassword(e.target.value)} className="form-control" name="password"/>
+                          </div>
+                          <div className="modal-footer">
+                              <button type="button" onClick={submitHandler} className="btn btn-outline-light">
+                                {loading?<div className="spinner-border text-primary" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                              </div>:<span className='fw-bolder'>Submit</span>}</button>
+                          </div>
+                      </section>
+                  </div>
+                </section>
+            </div>
         </div>
-    </div>
-    
-        <ToastContainer />
+</div>
+      <ToastContainer />
 </main>
 </>
 )
