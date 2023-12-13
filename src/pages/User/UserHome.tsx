@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
+import { UserIndex } from "../../Component/User/UserIndex";
+import UserHistory from "./UserHistory";
+import { Settings } from "../../Component/Settings";
 
 const UserHome=()=>{
     return(
-        <main className="overflow-auto col-sm-12 m-auto" style={{position:'fixed',width:'100%',height:'100%',backgroundImage:'url(/visitor/doctors.jpg)',backgroundSize:'cover',backgroundRepeat:'no-repeat',backgroundPosition:'fixed'}}>
-        <nav className="navbar navbar-expand-md navbar-info sticky-top mb-4"  style={{backgroundColor:'rgb(0,0,0,.5)'}}>
+        <main className="overflow-auto col-sm-12 m-auto" style={{position:'fixed'
+        ,width:'100%',height:'100%',
+        backgroundImage:'url(/User/hospital-van.jpeg)',backgroundSize:'cover',
+        backgroundAttachment: 'fixed',
+        backgroundRepeat:'no-repeat',backgroundPosition:'center center'}}>
+        <nav className="navbar navbar-expand-md navbar-info sticky-top mb-4"  style={{backgroundColor:'rgb(50,10,20,.8)'}}>
             <Link className="navbar-brand mx-2" to={'/'}>
                 <img  src="/icon/hospital.png" width={100} alt="" />
             </Link>
@@ -26,17 +33,12 @@ const UserHome=()=>{
           </li>
           <li className="nav-item" role="presentation">
             <button className="nav-link hover-me p-4 hover-me rounded-pill" id="hospital-tab" data-bs-toggle="pill" data-bs-target="#hospital" type="button" role="tab" aria-controls="hospital" aria-selected="false">
-            <i className="bi bi-hospital-fill display-6"></i>
+            <img src="/parchment.png" width={70} alt="" />
             </button>
           </li>
           <li className="nav-item" role="presentation">
             <button className="nav-link hover-me" id="pills-setting-tab" data-bs-toggle="pill" data-bs-target="#pills-setting" type="button" role="tab" aria-controls="pills-setting" aria-selected="false">
             <i className="bi bi-gear-fill display-6"></i>
-            </button>
-          </li>
-          <li className="nav-item" role="presentation">
-            <button className="nav-link hover-me p-4 hover-me rounded-pill" id="hospital-tab" data-bs-toggle="pill" data-bs-target="#pills-user-tab" type="button" role="tab" aria-controls="hospital" aria-selected="false">
-            <i className="bi bi-people-fill display-6"></i>
             </button>
           </li>
         </ul>
@@ -55,16 +57,13 @@ const UserHome=()=>{
         <main>
         <div className="tab-content overflow-auto" id="pills-tabContent">
           <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-            
+            <UserIndex/>
           </div>
           <div className="tab-pane fade" id="hospital" role="tabpanel" aria-labelledby="hospital-tab">
-             
+             <UserHistory/>
           </div>
           <div className="tab-pane fade show" id="pills-setting" role="tabpanel" aria-labelledby="pills-setting-tab">
-             
-          </div>
-          <div className="tab-pane fade" id="pills-user-tab" role="tabpanel" aria-labelledby="pills-contact-tab">
-             
+             <Settings/>
           </div>
         </div>
         </main>
