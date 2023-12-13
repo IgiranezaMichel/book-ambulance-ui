@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const Index=()=>{
     return(
         <>
@@ -10,8 +12,8 @@ const Index=()=>{
                     </h1>
                     <p className="text-white mb-4">Tempor rebum no at dolore lorem clita rebum rebum ipsum
                         rebum stet dolor sed justo kasd. Ut dolor sed magna dolor sea diam. Sit diam sit</p>
-                    <a href="" className="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3">signup</a>
-                    <a href="" className="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill">login</a>
+                    <Link to={'/signup'} className="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3">signup</Link>
+                    <Link to={'/login'} className="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill">login</Link>
                 </div>
                 <div className="col-lg-6 align-self-end text-center text-lg-end">
                     <img  className="img-fluid" src="/visitor/ambulance.png" alt=""/>
