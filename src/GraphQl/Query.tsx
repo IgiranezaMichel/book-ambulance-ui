@@ -1,12 +1,13 @@
 import { gql, useQuery } from '@apollo/client';
 
-export const GET_ALL_USERS =async()=> {
+export const GET_ALL_USERS =()=> {
 const getAllUser=gql`
 query {
     getAllUser {
       id
       name
       email
+      role
     }
   }
 `;
