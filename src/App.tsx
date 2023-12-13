@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import SignUp from './pages/Visitor/SignUp'
 import QueryExample from './pages/Visitor/QueryExample'
 import { Admin } from './pages/Admin/Admin'
-import { CrudHospital } from './Component/Hospital/crudHospital'
+import { CrudHospital } from './Component/Admin/CrudHospital'
 
 function App() {
   return (
