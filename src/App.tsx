@@ -6,8 +6,13 @@ import UserHome from './pages/User/UserHome'
 import { DriverHome } from './pages/Driver/DriverHome'
 import Index from './pages/Visitor/Index'
 import Login from './pages/Visitor/Login'
+import { SystemUser } from './Enums/SystemUser'
+import { Err404} from './pages/Visitor/Err404'
+import { CrudUser } from './pages/User/CrudUser'
 
 function App() {
+  SystemUser.ADMIN;
+  localStorage.setItem('','');
   return (
     <>
  <Router>
@@ -17,8 +22,10 @@ function App() {
       <Route path='/login' element={<Login/>}/>
       <Route path='/admin' element={<Admin/>}/>
       <Route path='/admin/hospital/:id/:action' element={<CrudHospital/>}/>
+      <Route path='/admin/user/:id/:action' element={<CrudUser/>}/>
       <Route path='/user' element={<UserHome/>}/>
       <Route path='/driver' element={<DriverHome/>}/>
+      <Route path='*' element={<Err404/>}/>
     </Routes>
  </Router>
     </>
