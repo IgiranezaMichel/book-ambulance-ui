@@ -75,8 +75,8 @@ return(
                     <td><i className="bi bi-envelope"></i> {user.email}</td>
                     <td>{user.role}</td>
                     <td>
-                        <Link to={'update/'+user.id} className="btn"><i className="bi bi-pencil"></i></Link>
-                        <Link to={'delete/'+user.id} className="btn"><i className="bi bi-trash"></i></Link>
+                        <Link to={'user/'+user.id+'/update'} className="btn"><i className="bi bi-pencil"></i></Link>
+                        <Link to={'user/'+user.id+'/delete'} className="btn"><i className="bi bi-trash"></i></Link>
                     </td>
                 </tr>
                     )
