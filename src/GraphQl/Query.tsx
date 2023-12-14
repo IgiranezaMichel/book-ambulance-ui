@@ -13,7 +13,31 @@ query {
 `;
 return useQuery(getAllUser);
 }
-export const GET_ALL_PROVINCE=async()=>{
+// export const GET_USER_BY_ID =(id:any)=> {
+//   const findUserById=gql`
+//   query GetHospitalById($id: ID!) {
+//     findUserById(id: $id) {
+//         id
+//         name
+//         email
+//       }
+//     }
+//   `;
+//   const identity=parseInt(id);
+//   return (useQuery(findUserById,{ variables:{id:identity}}));
+//   }
+  export const GET_USER_BY_ID=(id:string|undefined)=>{
+    const getUserDetail=gql`
+    query FindUserById($id: ID!) {
+      findUserById(id: $id) {
+        id
+        name
+      }
+  }
+  `;
+  return (useQuery(getUserDetail,{ variables:{id:id}}));};
+
+export const GET_ALL_PROVINCE=()=>{
 const getAllProvince=gql`
 query{ getAllProvince{
      id
